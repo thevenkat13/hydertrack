@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom spinner animation for button (from previous HTML, can be inlined or kept here) */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-custom {
+  animation: spin 1s linear infinite;
+}
+
+/* Ensure map container has height */
+#mapid { /* react-leaflet creates a div with mapid by default, or you can assign it in MapContainer */
+  height: 384px; /* h-96 equivalent */
+  border-radius: 1rem; /* rounded-2xl */
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border: 4px solid #93c5fd;
+  transition: all 0.3s ease-in-out;
+}
+#mapid:hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}

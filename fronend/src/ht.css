@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap');
+
+:root {
+    --bg-main: #111113;
+    --bg-panel: #1A1A1D;
+    --border-color: #444448;
+    --text-primary: #E0E0E0;
+    --text-secondary: #8F8F90;
+    --accent-color: #BFFF00; /* Electric Lime */
+    --accent-text: #111113;
+    --font-mono: 'IBM Plex Mono', monospace;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    margin: 0;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.app-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+        "header header"
+        "controls map"
+        "results map";
+    gap: 1rem;
+    padding: 1rem;
+    height: 100vh;
+    max-height: 100vh;
+}
+
+.main-header {
+    grid-area: header;
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-panel);
+}
+
+/* Updated Logo Styles */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+}
+.logo-text {
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+}
+.logo-version {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    align-self: flex-start;
+    margin-left: 0.25rem;
+    background: var(--border-color);
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+.header-info {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.control-panel {
+    grid-area: controls;
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-content: start;
+    background: var(--bg-panel);
+}
+
+.results-panel, .map-panel {
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-panel);
+    overflow: hidden;
+}
+.results-panel { grid-area: results; }
+.map-panel { grid-area: map; }
+
+
+.panel-header {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    background-color: #222225;
+}
+
+.panel-content {
+    padding: 1rem;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+.panel-content::-webkit-scrollbar { width: 8px; }
+.panel-content::-webkit-scrollbar-track { background: var(--bg-panel); }
+.panel-content::-webkit-scrollbar-thumb { background: var(--border-color); }
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+/* Updated Label Styles for Icons */
+.input-group label {
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.input-group label svg {
+    fill: var(--text-secondary);
+}
+
+.input-group select {
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.75rem;
+    font-family: var(--font-mono);
+    width: 100%;
+}
+.input-group select:focus {
+    outline: 1px solid var(--accent-color);
+}
+
+.execute-button {
+    grid-column: 1 / -1;
+    background-color: var(--accent-color);
+    color: var(--accent-text);
+    border: 1px solid var(--accent-color);
+    padding: 1rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.execute-button:hover:not(:disabled) {
+    background-color: var(--bg-main);
+    color: var(--accent-color);
+}
+.execute-button:disabled {
+    background: var(--border-color);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+}
+
+.loader, .error-message, .placeholder {
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+.error-message { color: #ff5555; }
+.loader { animation: blink 1.5s linear infinite; }
+@keyframes blink { 50% { color: var(--text-primary); } }
+
+.routes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.route-card {
+    border: 1px solid var(--border-color);
+    background: var(--bg-main);
+}
+.route-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    background-color: #2a2a2e;
+}
+.route-type {
+    font-weight: 700;
+    color: var(--accent-color);
+}
+.route-summary {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8rem;
+}
+.route-segments {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.segment {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 1rem;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+/* Updated Segment Type Styles for Icons */
+.segment-type {
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+.segment-type svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--text-secondary);
+}
+.segment-path {
+    font-weight: 500;
+}
+.segment-cost {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.map-container {
+    padding: 0;
+}
+.map-view {
+    width: 100%;
+    height: 100%;
+}
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    background: var(--bg-main);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+.custom-station-icon .station-marker {
+    width: 12px;
+    height: 12px;
+    border: 2px solid #ffffff;
+    outline: 1px solid #000000;
+    border-radius: 50%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .app-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto 1fr 1fr;
+        grid-template-areas:
+            "header"
+            "controls"
+            "results"
+            "map";
+        height: auto;
+    }
+    .map-panel {
+        min-height: 400px;
+    }
+}
