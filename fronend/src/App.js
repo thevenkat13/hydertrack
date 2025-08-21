@@ -5,7 +5,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import './App.css'; 
+import './App.css';
 import ReactDOMServer from 'react-dom/server';
 
 // --- LEAFLET ICON FIX ---
@@ -61,7 +61,7 @@ function App() {
     const [allStationsData, setAllStationsData] = useState([]);
     const [showAllStations, setShowAllStations] = useState(true);
 
-    const API_BASE_URL = 'http://localhost:5000';
+    const API_BASE_URL = 'https://hydertrack-backend.onrender.com';
 
     useEffect(() => {
         const fetchMetroStations = async () => {
@@ -74,7 +74,7 @@ function App() {
                 const sortedStations = uniqueStations.sort((a, b) => a.name.localeCompare(b.name));
                 setMetroStations(sortedStations);
                 if (sortedStations.length > 1) {
-                    setOrigin('Bharat Nagar'); 
+                    setOrigin('Bharat Nagar');
                     setDestination('Raidurg');
                 }
             } catch (err) {
@@ -241,7 +241,7 @@ function App() {
                                         return (
                                             <div key={index} className="instruction-card change">
                                                 <div className="line-indicator" style={{backgroundColor: toLineColor}}></div>
-                                                 <div className="instruction-content">
+                                                <div className="instruction-content">
                                                     <p>INTERCHANGE at <strong>{inst.station}</strong></p>
                                                     <p>Switch to the <strong style={{color: toLineColor}}>{inst.to_line}</strong></p>
                                                 </div>
